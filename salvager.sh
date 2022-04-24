@@ -38,7 +38,7 @@ fi
 params=()
 if ! [[ -z $opt_source_out ]]; then
     path_out=$(readlink -f "$opt_source_out")
-    params+=(--volume "$path_out:/src")
+    params+=(--volume "$path_out:/src-out")
 fi
 
 path_dok=$(readlink -f "$opt_dok_managed")
