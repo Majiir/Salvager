@@ -3,11 +3,11 @@
 usage() {
     echo "Usage:"
     echo " $0 (-h|--help)"
-    echo " $0 (-m|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>]"
+    echo " $0 (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>]"
 }
 
 options=$(getopt \
-    -o hs:m: \
+    -o hs:d: \
     --long help,source-out:,dok-managed: \
     -n 'salvager' \
     -- "$@")
@@ -22,14 +22,14 @@ while true; do
   case "$1" in
     -h | --help ) usage; exit 0 ;;
     -s | --source-out ) opt_source_out="$2"; shift 2 ;;
-    -m | --dok-managed ) opt_dok_managed="$2"; shift 2 ;;
+    -d | --dok-managed ) opt_dok_managed="$2"; shift 2 ;;
     * ) break ;;
   esac
 done
 
 if [[ -z $opt_dok_managed ]]
 then
-    echo "Missing required option: (-m|--dok-managed) <dok-managed-dir>"
+    echo "Missing required option: (-d|--dok-managed) <dok-managed-dir>"
     echo
     usage
     exit 1
