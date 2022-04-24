@@ -12,7 +12,13 @@ Code patch tool for Deserts of Kharak. Create `diff`-style patches for the game'
 
 ```
 ./salvager.sh (-h|--help)
-./salvager.sh (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-a|--apply-patches) <patch-dir>] [(-m|--modified-source) <modified-source-dir> [(-g|--generate-patch) <generated-patch-file>]] [(-o|--artifacts-out) <artifacts-out-dir>]
+./salvager.sh
+    (-d|--dok-managed) <dok-managed-dir>
+    [(-s|--source-out) <source-out-dir>]
+    [(-a|--apply-patches) <patch-dir>]
+    [(-m|--modified-source) <modified-source-dir>
+        [(-g|--generate-patch) <generated-patch-file>] ]
+    [(-o|--artifacts-out) <artifacts-out-dir>]
 ```
 
 - `-h|--help`: display command usage.

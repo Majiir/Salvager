@@ -3,7 +3,13 @@
 usage() {
     echo "Usage:"
     echo " $0 (-h|--help)"
-    echo " $0 (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-a|--apply-patches) <patch-dir>] [(-m|--modified-source) <modified-source-dir> [(-g|--generate-patch) <generated-patch-file>]] [(-o|--artifacts-out) <artifacts-out-dir>]"
+    echo " $0
+    (-d|--dok-managed) <dok-managed-dir>
+    [(-s|--source-out) <source-out-dir>]
+    [(-a|--apply-patches) <patch-dir>]
+    [(-m|--modified-source) <modified-source-dir>
+        [(-g|--generate-patch) <generated-patch-file>] ]
+    [(-o|--artifacts-out) <artifacts-out-dir>]"
 }
 
 options=$(getopt \
