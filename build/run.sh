@@ -15,3 +15,10 @@ then
     echo "Copying sources..."
     cp -r /src/. /src-out/
 fi
+
+if [ -d "/out" ]
+then
+    echo "Compiling..."
+    dotnet build -o /out-tmp /src
+    cp -r /out-tmp/BBI.*.dll /out/
+fi
