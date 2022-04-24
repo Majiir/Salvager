@@ -12,10 +12,11 @@ Code patch tool for Deserts of Kharak. Create `diff`-style patches for the game'
 
 ```
 ./salvager.sh (-h|--help)
-./salvager.sh (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-o|--artifacts-out) <artifacts-out-dir>]
+./salvager.sh (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-m|--modified-source) <modified-source-dir>] [(-o|--artifacts-out) <artifacts-out-dir>]
 ```
 
 - `-h|--help`: display command usage.
 - `-d|--dok-managed <dok-managed-dir>` (required): path to the `Deserts of Kharak/Data/Managed/` folder of a fresh, unmodified installation of Deserts of Kharak.
 - `-s|--source-out <source-out-dir>` (optional): path where the tool will write decompiled source files.
+- `-m|--modified-source <modified-source-dir>` (optional): path to modified source files. The compiled artifacts will be built from this source instead of the decompiled and patched source.
 - `-o|--artifacts-out <artifacts-out-dir>` (optional): path where the tool will write recompiled assemblies.

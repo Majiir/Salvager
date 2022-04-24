@@ -16,6 +16,19 @@ then
     cp -r /src/. /src-out/
 fi
 
+if [ -d "/mod" ]
+then
+    echo "Applying modified source..."
+    exit_code=0
+    diff -Naur src/ mod/ > mod.patch || exit_code=$?
+    if [ $exit_code -gt 1 ]
+    then
+        cat mod.patch
+        exit 1
+    fi
+    patch -p0 < mod.patch
+fi
+
 if [ -d "/out" ]
 then
     echo "Compiling..."
