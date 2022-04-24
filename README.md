@@ -71,6 +71,34 @@ Copy `BBI.Unity.Game.dll` into the `Data/Managed/` folder of your Deserts of Kha
 
 ![](example-version-string.png)
 
+Next, we will generate a patch file containing the changes you made. This works by comparing the decompiled source of the base game with the modified source you provide:
+
+```
+$ ./salvager.sh --dok-managed /path/to/managed --modified-source src/ --generate-patch version.patch
+Decompiling...
+Applying modified source...
+patching file src/BBI.Unity.Game/Properties/AssemblyInfo.cs
+```
+
+The `version.patch` file contains a diff with everything you changed:
+
+```diff
+diff -Naur src/BBI.Unity.Game/Properties/AssemblyInfo.cs mod/BBI.Unity.Game/Properties/AssemblyInfo.cs
+--- src/BBI.Unity.Game/Properties/AssemblyInfo.cs	2022-04-24 16:49:01.703796356 +0000
++++ mod/BBI.Unity.Game/Properties/AssemblyInfo.cs	2022-04-24 16:48:39.756146005 +0000
+@@ -8,7 +8,7 @@
+
+ [assembly: ComVisible(false)]
+ [assembly: AssemblyFileVersion("1.0.0.0")]
+-[assembly: AssemblyInformationalVersion("v1.3.0")]
++[assembly: AssemblyInformationalVersion("v1.3.0 modified with Salvager")]
+ [assembly: InternalsVisibleTo("BBI.Unity.Tests")]
+ [assembly: Guid("5b5b445b-fc18-4d62-af2b-2ff78efd4b22")]
+ [assembly: InternalsVisibleTo("BBI.Debugger")]
+```
+
+Move that file to a `patches` folder. Now, you can repeat the process but include `--apply-patches patches/` with every Salvager command. Every time Salvager runs, it will decompile the base game, apply all of the patches in the `patches` folder (in order by filename), dump the patched source, read your modified source, generate a patch file with the difference, and compile the final result.
+
 ## Current Limitations
 
 - The container currently runs as root and writes files with root permissions.
