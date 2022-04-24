@@ -10,6 +10,15 @@ ilspycmd \
     -lv CSharp5 \
     /dok/BBI.*.dll
 
+if [ -d "/patch" ]
+then
+    echo "Applying patches..."
+    for patch_file in /patch/*; do
+        echo " Applying $patch_file..."
+        patch -p0 < $patch_file
+    done
+fi
+
 if [ -d "/src-out" ]
 then
     echo "Copying sources..."

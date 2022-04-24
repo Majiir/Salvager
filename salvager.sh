@@ -3,12 +3,12 @@
 usage() {
     echo "Usage:"
     echo " $0 (-h|--help)"
-    echo " $0 (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-m|--modified-source) <modified-source-dir> [(-g|--generate-patch) <generated-patch-file>]] [(-o|--artifacts-out) <artifacts-out-dir>]"
+    echo " $0 (-d|--dok-managed) <dok-managed-dir> [(-s|--source-out) <source-out-dir>] [(-a|--apply-patches) <patch-dir>] [(-m|--modified-source) <modified-source-dir> [(-g|--generate-patch) <generated-patch-file>]] [(-o|--artifacts-out) <artifacts-out-dir>]"
 }
 
 options=$(getopt \
-    -o hs:d:m:g:o: \
-    --long help,source-out:,dok-managed:,modified-source:,generate-patch:,artifacts-out: \
+    -o hs:a:d:m:g:o: \
+    --long help,source-out:,dok-managed:,apply-patches:,modified-source:,generate-patch:,artifacts-out: \
     -n 'salvager' \
     -- "$@")
 
@@ -18,6 +18,7 @@ eval set -- "$options"
 
 opt_source_out=
 opt_dok_managed=
+opt_patch_dir=
 opt_modified_source=
 opt_generated_patch=
 opt_artifacts_out=
@@ -26,6 +27,7 @@ while true; do
     -h | --help ) usage; exit 0 ;;
     -s | --source-out ) opt_source_out="$2"; shift 2 ;;
     -d | --dok-managed ) opt_dok_managed="$2"; shift 2 ;;
+    -a | --apply-patches ) opt_patch_dir="$2"; shift 2 ;;
     -m | --modified-source ) opt_modified_source="$2"; shift 2 ;;
     -g | --generate-patch ) opt_generated_patch="$2"; shift 2 ;;
     -o | --artifacts-out ) opt_artifacts_out="$2"; shift 2 ;;
@@ -45,6 +47,11 @@ params=()
 if ! [[ -z $opt_source_out ]]; then
     path_out=$(readlink -f "$opt_source_out")
     params+=(--volume "$path_out:/src-out")
+fi
+
+if ! [[ -z $opt_patch_dir ]]; then
+    path_patch_dir=$(readlink -f "$opt_patch_dir")
+    params+=(--volume "$path_patch_dir:/patch")
 fi
 
 if ! [[ -z $opt_modified_source ]]; then
