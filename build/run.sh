@@ -26,6 +26,7 @@ then
         cat mod.patch
         exit 1
     fi
+    cp -f mod.patch mod.patch.out
     patch -p0 < mod.patch
 fi
 
